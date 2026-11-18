@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#163f38">
+    <meta name="description" content="Periksa email dengan model klasifikasi phishing yang berjalan di aplikasi lokal.">
+    <title>Saring — Periksa email</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Literata:opsz,wght@7..72,500;7..72,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <a class="wordmark" href="/" aria-label="Saring — halaman utama">Saring<span class="wordmark-period" aria-hidden="true">.</span></a>
+      <div class="masthead-details">
+        <p class="model-presence" id="model-presence" data-state="checking" role="status" aria-live="polite">
+          <span class="presence-mark" aria-hidden="true"></span>
+          <span id="model-presence-text">Memeriksa model</span>
+        </p>
+        <span class="masthead-divider" aria-hidden="true"></span>
+        <p class="model-name">Random Forest <span>·</span> CEAS_08</p>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="introduction" aria-labelledby="page-title">
+        <div class="introduction-copy">
+          <h1 id="page-title">Periksa email sebelum membuka tautannya.</h1>
+          <p>Masukkan subjek dan isi untuk melihat klasifikasi model, probabilitas phishing, dan ciri URL yang terukur.</p>
+        </div>
+        <div class="introduction-note" aria-label="Ringkasan pemeriksaan">
+          <div>
+            <span class="note-label">MASUKAN</span>
+            <span class="note-value">Subjek dan isi email</span>
+          </div>
+          <div>
+            <span class="note-label">KELUARAN</span>
+            <span class="note-value">Label dan sinyal URL</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="page-error" id="page-error" role="alert" hidden></div>
+
+      <section class="workbench" aria-label="Pemeriksaan email">
+        <form class="email-editor" id="email-form" novalidate>
+          <div class="editor-heading">
+            <div>
+              <h2>Isi email</h2>
+              <p>Salin pesan yang ingin Anda periksa.</p>
+            </div>
+            <button class="text-action" id="load-sample" type="button">Muat contoh simulasi</button>
+          </div>
+
+          <div class="field-group">
+            <label for="subject">Subjek</label>
+            <input id="subject" name="subject" type="text" maxlength="300" autocomplete="off" placeholder="Subjek email">
+          </div>
+
+          <div class="field-group body-field">
+            <div class="label-line">
+              <label for="body">Isi email</label>
+              <span class="character-count" id="character-count">0 / 50.000</span>
+            </div>
+            <textarea id="body" name="body" rows="12" maxlength="49700" placeholder="Tempel isi email di sini…" spellcheck="true"></textarea>
+          </div>
+
+          <div class="editor-footnote">
+            <p>Email diproses oleh aplikasi ini untuk membuat prediksi.</p>
+            <button class="primary-action" id="analyze-button" type="submit">Analisis email</button>
+          </div>
+          <p class="editor-error" id="editor-error" role="alert" hidden></p>
+        </form>
+
+        <aside class="report" id="report" aria-labelledby="report-title" aria-live="polite" aria-busy="false">
+          <div class="report-heading">
+            <h2 id="report-title">Hasil pemeriksaan</h2>
+            <span class="report-state" id="report-state">Menunggu email</span>
+          </div>
+
+          <div class="empty-report" id="empty-report">
+            <p class="empty-title" id="empty-report-title">Belum ada hasil.</p>
+            <p id="empty-report-copy">Klasifikasi dan sinyal yang terukur akan muncul di sini setelah email dianalisis.</p>
+          </div>
+
+          <div class="analysis-result" id="analysis-result" hidden>
+            <div class="verdict" id="verdict">
+              <span class="verdict-label" id="verdict-label"></span>
+              <p id="verdict-copy"></p>
+            </div>
+
+            <section class="probability" aria-labelledby="probability-title">
+              <div class="probability-heading">
+                <h3 id="probability-title">Probabilitas phishing</h3>
+                <strong id="probability-value">—</strong>
+              </div>
+              <div class="probability-track" id="probability-track" role="meter" aria-label="Probabilitas phishing" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0%">
+                <span class="probability-fill" id="probability-fill"></span>
+              </div>
+              <p class="probability-note">Nilai keluaran model, bukan jaminan email aman atau berbahaya.</p>
+            </section>
+
+            <section class="url-observations" aria-labelledby="observations-title">
+              <div class="observation-heading">
+                <span class="annotation-mark" aria-hidden="true"></span>
+                <div>
+                  <p class="annotation-label">CATATAN URL</p>
+                  <h3 id="observations-title">Sinyal terukur</h3>
+                </div>
+              </div>
+              <dl class="signal-list" id="signal-list"></dl>
+            </section>
+
+            <section class="detected-urls" aria-labelledby="urls-title">
+              <div class="urls-heading">
+                <h3 id="urls-title">URL terdeteksi</h3>
+                <span id="url-count">0</span>
+              </div>
+              <ul id="url-list"></ul>
+              <p class="no-urls" id="no-urls" hidden>Tidak ada URL yang terdeteksi pada email ini.</p>
+            </section>
+
+            <p class="model-caveat">Sinyal URL adalah ciri yang terukur, bukan alasan model memilih label. Periksa tautan melalui situs atau aplikasi resmi.</p>
+          </div>
+
+          <p class="report-error" id="report-error" role="alert" hidden></p>
+        </aside>
+      </section>
+
+      <noscript><p class="page-error">Aktifkan JavaScript agar formulir dapat mengirim email ke model.</p></noscript>
+    </main>
+
+    <footer class="page-footer">
+      <p>Demo klasifikasi email untuk pembelajaran. Hasil model belum divalidasi sebagai perlindungan email di dunia nyata.</p>
+      <button class="footer-reset" id="reset-button" type="button" disabled>Hapus isi dan hasil</button>
+    </footer>
+  </body>
+</html>

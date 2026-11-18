@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-18T15:24:50Z",
+  "title": "Design System: Saring",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#182725",
+        "tonalRamp": ["oklch(15% 0.009 186)", "oklch(25% 0.015 186)", "oklch(35% 0.021 186)", "oklch(45% 0.021 186)", "oklch(55% 0.021 186)", "oklch(65% 0.021 186)", "oklch(80% 0.012 186)", "oklch(95% 0.003 186)"]
+      },
+      "pine": {
+        "role": "primary",
+        "displayName": "Deep Pine",
+        "canonical": "#163f38",
+        "tonalRamp": ["oklch(15% 0.020 180)", "oklch(25% 0.034 180)", "oklch(35% 0.047 180)", "oklch(45% 0.047 180)", "oklch(55% 0.047 180)", "oklch(65% 0.047 180)", "oklch(80% 0.027 180)", "oklch(95% 0.007 180)"]
+      },
+      "leaf": {
+        "role": "secondary",
+        "displayName": "Leaf Green",
+        "canonical": "#2f6759",
+        "tonalRamp": ["oklch(15% 0.027 175)", "oklch(25% 0.046 175)", "oklch(35% 0.064 175)", "oklch(45% 0.064 175)", "oklch(55% 0.064 175)", "oklch(65% 0.064 175)", "oklch(80% 0.036 175)", "oklch(95% 0.009 175)"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#f1eee4",
+        "tonalRamp": ["oklch(15% 0.006 93)", "oklch(25% 0.010 93)", "oklch(35% 0.014 93)", "oklch(45% 0.014 93)", "oklch(55% 0.014 93)", "oklch(65% 0.014 93)", "oklch(80% 0.008 93)", "oklch(95% 0.002 93)"]
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Proof Sheet",
+        "canonical": "#faf9f4",
+        "tonalRamp": ["oklch(15% 0.003 97)", "oklch(25% 0.005 97)", "oklch(35% 0.007 97)", "oklch(45% 0.007 97)", "oklch(55% 0.007 97)", "oklch(65% 0.007 97)", "oklch(80% 0.004 97)", "oklch(95% 0.001 97)"]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule Gray",
+        "canonical": "#d2cec2",
+        "tonalRamp": ["oklch(15% 0.007 92)", "oklch(25% 0.012 92)", "oklch(35% 0.017 92)", "oklch(45% 0.017 92)", "oklch(55% 0.017 92)", "oklch(65% 0.017 92)", "oklch(80% 0.010 92)", "oklch(95% 0.002 92)"]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Green Gray",
+        "canonical": "#52615e",
+        "tonalRamp": ["oklch(15% 0.008 182)", "oklch(25% 0.014 182)", "oklch(35% 0.019 182)", "oklch(45% 0.019 182)", "oklch(55% 0.019 182)", "oklch(65% 0.019 182)", "oklch(80% 0.011 182)", "oklch(95% 0.003 182)"]
+      },
+      "rust": {
+        "role": "secondary",
+        "displayName": "Warm Rust",
+        "canonical": "#a83f2d",
+        "tonalRamp": ["oklch(15% 0.055 32)", "oklch(25% 0.091 32)", "oklch(35% 0.128 32)", "oklch(45% 0.142 32)", "oklch(55% 0.142 32)", "oklch(65% 0.142 32)", "oklch(80% 0.081 32)", "oklch(95% 0.020 32)"]
+      },
+      "safe": {
+        "role": "tertiary",
+        "displayName": "Safe Green",
+        "canonical": "#276348",
+        "tonalRamp": ["oklch(15% 0.033 161)", "oklch(25% 0.055 161)", "oklch(35% 0.077 161)", "oklch(45% 0.077 161)", "oklch(55% 0.077 161)", "oklch(65% 0.077 161)", "oklch(80% 0.044 161)", "oklch(95% 0.011 161)"]
+      },
+      "measure": {
+        "role": "tertiary",
+        "displayName": "Measurement Amber",
+        "canonical": "#ba7146",
+        "tonalRamp": ["oklch(15% 0.038 50)", "oklch(25% 0.063 50)", "oklch(35% 0.089 50)", "oklch(45% 0.109 50)", "oklch(55% 0.109 50)", "oklch(65% 0.109 50)", "oklch(80% 0.062 50)", "oklch(95% 0.016 50)"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Literata Display",
+        "purpose": "Introductory headline and editorial hierarchy."
+      },
+      "body": {
+        "displayName": "IBM Plex Sans",
+        "purpose": "Reading copy, form labels, and controls."
+      },
+      "measurement": {
+        "displayName": "IBM Plex Mono",
+        "purpose": "Compact labels and measured values only."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "report-arrival",
+        "value": "420ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Brings the completed analysis report into view."
+      },
+      {
+        "name": "probability-fill",
+        "value": "450ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Updates the measured probability bar."
+      }
+    ],
+    "breakpoints": [
+      { "name": "wide", "value": "960px" },
+      { "name": "stack", "value": "760px" },
+      { "name": "compact", "value": "480px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Analysis Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one dominant action that submits the email for classification.",
+      "html": "<button class=\"ds-primary-action\" type=\"button\">Analisis email</button>",
+      "css": ".ds-primary-action { min-height: 48px; padding: 12px 19px; border: 1px solid var(--pine); border-radius: 2px; background: var(--pine); color: #fffdf5; font: 600 14px \"IBM Plex Sans\", \"Segoe UI\", sans-serif; cursor: pointer; } .ds-primary-action:hover:not(:disabled) { border-color: #24584d; background: #24584d; } .ds-primary-action:focus-visible { outline: 3px solid var(--rust); outline-offset: 3px; } .ds-primary-action:disabled { cursor: wait; opacity: 0.72; }"
+    },
+    {
+      "name": "Text Action",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "An unboxed underlined action for loading the sample or resetting the form.",
+      "html": "<button class=\"ds-text-action\" type=\"button\">Muat contoh simulasi</button>",
+      "css": ".ds-text-action { padding: 0; border: 0; border-radius: 0; background: transparent; color: var(--pine); font: 600 13px \"IBM Plex Sans\", \"Segoe UI\", sans-serif; text-decoration: underline; text-decoration-color: #95a49b; text-underline-offset: 0.25em; cursor: pointer; } .ds-text-action:hover:not(:disabled) { color: var(--rust); text-decoration-color: currentColor; } .ds-text-action:focus-visible { outline: 3px solid var(--rust); outline-offset: 3px; } .ds-text-action:disabled { color: var(--muted); cursor: wait; }"
+    },
+    {
+      "name": "Subject Field",
+      "kind": "input",
+      "refersTo": "input-text",
+      "description": "A single-line subject field on the lighter proof-sheet surface.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-subject\">Subjek</label><input class=\"ds-subject\" id=\"ds-subject\" type=\"text\" placeholder=\"Subjek email\">",
+      "css": ".ds-field-label { display: block; margin-bottom: 8px; color: var(--ink); font: 600 13px/1.55 \"IBM Plex Sans\", \"Segoe UI\", sans-serif; } .ds-subject { display: block; width: 100%; min-height: 48px; padding: 10px 13px; border: 1px solid #c7c4b9; border-radius: 2px; background: var(--sheet); color: var(--ink); caret-color: var(--rust); font: 400 16px/1.55 \"IBM Plex Sans\", \"Segoe UI\", sans-serif; } .ds-subject::placeholder { color: #596763; opacity: 1; } .ds-subject:focus-visible { outline: 3px solid var(--rust); outline-offset: 3px; } .ds-subject:disabled { background: #eae7dd; color: var(--muted); cursor: wait; }"
+    },
+    {
+      "name": "Email Body Field",
+      "kind": "input",
+      "refersTo": "textarea",
+      "description": "The vertically resizable message field, sized for long-form email text.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-body\">Isi email</label><textarea class=\"ds-body\" id=\"ds-body\" rows=\"12\" placeholder=\"Tempel isi email di sini…\"></textarea>",
+      "css": ".ds-field-label { display: block; margin-bottom: 8px; color: var(--ink); font: 600 13px/1.55 \"IBM Plex Sans\", \"Segoe UI\", sans-serif; } .ds-body { display: block; width: 100%; min-height: 286px; padding: 16px; border: 1px solid #c7c4b9; border-radius: 2px; background: var(--sheet); color: var(--ink); caret-color: var(--rust); font: 400 16px/1.65 \"IBM Plex Sans\", \"Segoe UI\", sans-serif; resize: vertical; } .ds-body::placeholder { color: #596763; opacity: 1; } .ds-body:focus-visible { outline: 3px solid var(--rust); outline-offset: 3px; } .ds-body:disabled { background: #eae7dd; color: var(--muted); cursor: wait; }"
+    },
+    {
+      "name": "Masthead",
+      "kind": "nav",
+      "refersTo": "nav-masthead",
+      "description": "The pine shell holds the Saring wordmark and current model availability.",
+      "html": "<header class=\"ds-masthead\"><a class=\"ds-wordmark\" href=\"#\">Saring<span>.</span></a><p class=\"ds-model-status\"><i></i>Berkas model tersedia</p><span class=\"ds-divider\"></span><p class=\"ds-model-name\">Random Forest · CEAS_08</p></header>",
+      "css": ".ds-masthead { min-height: 82px; padding: 0 clamp(22px, 6vw, 88px); display: flex; align-items: center; justify-content: space-between; gap: 28px; background: var(--pine); color: #f8f5ea; font: 400 12px/1.55 \"IBM Plex Sans\", \"Segoe UI\", sans-serif; } .ds-wordmark { color: inherit; font: 600 30px/1 \"Literata\", Georgia, serif; letter-spacing: -0.035em; text-decoration: none; } .ds-wordmark span { color: #d16b4b; } .ds-model-status { display: inline-flex; align-items: center; gap: 9px; margin: 0; color: #e3e9dc; } .ds-model-status i { width: 7px; height: 7px; flex: none; border-radius: 50%; background: #b6d5ad; } .ds-divider { width: 1px; height: 18px; background: rgb(248 245 234 / 34%); } .ds-model-name { margin: 0; color: #e3e9dc; } @media (max-width: 760px) { .ds-masthead { min-height: 72px; } .ds-model-name, .ds-divider { display: none; } }"
+    },
+    {
+      "name": "URL Measurement Gutter",
+      "kind": "custom",
+      "refersTo": "url-annotation",
+      "description": "A separate ruled margin for observable URL traits and their measured values.",
+      "html": "<section class=\"ds-url-gutter\"><div class=\"ds-url-heading\"><div><p>CATATAN URL</p><h3>Sinyal terukur</h3></div></div><dl><div><dt>Jumlah titik pada URL pertama</dt><dd>2</dd></div><div><dt>Menggunakan HTTPS</dt><dd>Ya</dd></div></dl></section>",
+      "css": ".ds-url-gutter { position: relative; padding: 20px 0 22px 18px; border-top: 1px solid var(--rule); color: var(--ink); font: 400 12px/1.55 \"IBM Plex Sans\", \"Segoe UI\", sans-serif; } .ds-url-gutter::before { position: absolute; top: 20px; bottom: 22px; left: 2px; width: 1px; background: var(--measure); content: \"\"; } .ds-url-heading { margin-bottom: 11px; } .ds-url-heading p { margin: 0 0 2px; color: var(--leaf); font: 400 10px/1.55 \"IBM Plex Mono\", Consolas, monospace; letter-spacing: 0.09em; } .ds-url-heading h3 { margin: 0; font-size: 14px; font-weight: 600; } .ds-url-gutter dl { margin: 0; } .ds-url-gutter dl div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: baseline; padding: 7px 0; border-top: 1px solid #dedbd2; } .ds-url-gutter dt { color: var(--muted); } .ds-url-gutter dd { margin: 0; color: var(--ink); font: 400 11px/1.55 \"IBM Plex Mono\", Consolas, monospace; text-align: right; }"
+    },
+    {
+      "name": "Probability Measurement",
+      "kind": "custom",
+      "refersTo": "probability-track",
+      "description": "A narrow amber bar reports the model probability independently from URL observations.",
+      "html": "<div class=\"ds-probability\"><div><h3>Probabilitas phishing</h3><strong>—</strong></div><div class=\"ds-probability-track\"><span></span></div></div>",
+      "css": ".ds-probability { padding: 17px 0 22px; border-top: 1px solid var(--rule); color: var(--ink); font: 400 14px/1.55 \"IBM Plex Sans\", \"Segoe UI\", sans-serif; } .ds-probability > div:first-child { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; } .ds-probability h3 { margin: 0; font-size: 14px; font-weight: 600; } .ds-probability strong { color: var(--pine); font: 500 13px/1.55 \"IBM Plex Mono\", Consolas, monospace; font-variant-numeric: tabular-nums; } .ds-probability-track { height: 5px; margin-top: 10px; overflow: hidden; background: #dcd9cf; } .ds-probability-track span { display: block; width: 0; height: 100%; background: var(--measure); }"
+    },
+    {
+      "name": "Model Verdict",
+      "kind": "custom",
+      "refersTo": "verdict",
+      "description": "The model's label leads the report, with distinct warning and safe states.",
+      "html": "<section class=\"ds-verdict ds-is-phishing\"><span>Indikasi phishing</span><p>Model mengklasifikasikan email ini sebagai phishing.</p></section>",
+      "css": ".ds-verdict { padding: 25px 0 22px; color: var(--ink); } .ds-verdict span { display: block; color: var(--rust); font: 500 clamp(29px, 3.1vw, 40px)/1.12 \"Literata\", Georgia, serif; letter-spacing: -0.035em; } .ds-verdict p { max-width: 42ch; margin: 9px 0 0; color: var(--muted); font: 400 14px/1.55 \"IBM Plex Sans\", \"Segoe UI\", sans-serif; } .ds-verdict.ds-is-safe span { color: var(--safe); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Margin Proof",
+    "overview": "Margin Proof treats phishing review as a careful reading and measurement task. Warm paper and a deep pine masthead frame an expressive editorial display face; a workhorse sans carries controls and explanations, while mono is reserved for measurements. Thin rules and open surfaces keep the page legible without turning it into a dashboard of equal-weight cards.\n\nThe page gives the email editor seven columns and the report five. The report keeps the model's label and phishing probability distinct from the narrow, rust-marked URL measurement gutter. URL traits describe observable features; they are not presented as the model's reasons for its classification.",
+    "keyCharacteristics": [
+      "Warm paper surfaces under a deep pine shell.",
+      "An asymmetrical editor and report, with the editor leading on narrow screens.",
+      "Mono type for measured values and a single annotated URL gutter.",
+      "Flat, open sections divided by thin rules."
+    ],
+    "rules": [
+      {
+        "name": "The Evidence Separation Rule",
+        "body": "Keep the URL measurement accent in its annotation gutter and the classification in its own verdict treatment; never make URL observations read as an explanation for the model.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat-Sheet Rule",
+        "body": "Keep surfaces flat at rest; use tonal contrast, rules, and placement to establish hierarchy.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the 12-column asymmetry and let the email editor remain the dominant interaction.",
+      "Do keep classification and probability distinct from descriptive URL measurements.",
+      "Do use expressive editorial typography, a workhorse sans for controls, and mono only for measurements.",
+      "Do keep surfaces open and use thin rules to organize the report."
+    ],
+    "donts": [
+      "Don't use Inter, Roboto, Fraunces, or a system-default display face.",
+      "Don't add purple, violet, or indigo gradients, glows, or repeated soft shadows.",
+      "Don't turn the page into a generic three-card feature grid or add placeholder emojis or decorative badges.",
+      "Don't add hover motion that does not clarify a state.",
+      "Don't present URL traits as the model's explanation or claim real-world detection performance."
+    ]
+  }
+}
