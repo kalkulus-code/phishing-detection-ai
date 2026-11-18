@@ -1,0 +1,13 @@
+# Abaikan dataset mentah yang tidak dipakai lagi
+CEAS_08.csv/
+
+# Abaikan folder virtual environment (jika ada)
+venv/
+.venv/
+env/
+
+# Abaikan file cache Python & konfigurasi IDE
+__pycache__/
+*.pyc
+.vscode/
+.DS_Store
