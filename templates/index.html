@@ -3,25 +3,51 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#163f38">
+    <meta name="theme-color" content="#173f32">
     <meta name="description" content="Periksa email dengan model klasifikasi phishing yang berjalan di aplikasi lokal.">
     <title>Saring — Periksa email</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Literata:opsz,wght@7..72,500;7..72,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("saring-theme");
+        if (savedTheme === "dark" || savedTheme === "light") {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch {
+        // The theme control still works when browser storage is disabled.
+      }
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css', v='2') }}">
+    <script src="{{ url_for('static', filename='js/app.js', v='2') }}" defer></script>
   </head>
   <body>
     <header class="masthead">
-      <a class="wordmark" href="/" aria-label="Saring — halaman utama">Saring<span class="wordmark-period" aria-hidden="true">.</span></a>
-      <div class="masthead-details">
-        <p class="model-presence" id="model-presence" data-state="checking" role="status" aria-live="polite">
-          <span class="presence-mark" aria-hidden="true"></span>
-          <span id="model-presence-text">Memeriksa model</span>
-        </p>
-        <span class="masthead-divider" aria-hidden="true"></span>
-        <p class="model-name">Random Forest <span>·</span> CEAS_08</p>
+      <div class="masthead-inner">
+        <a class="wordmark" href="/" aria-label="Saring — halaman utama">Saring<span class="wordmark-period" aria-hidden="true">.</span></a>
+        <nav class="primary-nav" aria-label="Navigasi utama">
+          <a href="#workspace">Workspace</a>
+          <a href="#cara-kerja">Cara kerja</a>
+        </nav>
+        <div class="masthead-actions">
+          <p class="model-presence" id="model-presence" data-state="checking" role="status" aria-live="polite">
+            <span class="presence-mark" aria-hidden="true"></span>
+            <span id="model-presence-text">Memeriksa model</span>
+          </p>
+          <span class="masthead-divider" aria-hidden="true"></span>
+          <p class="model-name">Random Forest <span>·</span> CEAS_08</p>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Aktifkan mode gelap" aria-pressed="false">
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <path d="M16.7 12.5A7.2 7.2 0 0 1 7.5 3.3a7.25 7.25 0 1 0 9.2 9.2Z"></path>
+            </svg>
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <circle cx="10" cy="10" r="3.2"></circle>
+              <path d="M10 1.8v2M10 16.2v2M18.2 10h-2M3.8 10h-2m12-5.8-1.4 1.4M5.6 14.4l-1.4 1.4m11.6 0-1.4-1.4M5.6 5.6 4.2 4.2"></path>
+            </svg>
+            <span id="theme-toggle-label">Gelap</span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -31,20 +57,33 @@
           <h1 id="page-title">Periksa email sebelum membuka tautannya.</h1>
           <p>Masukkan subjek dan isi untuk melihat klasifikasi model, probabilitas phishing, dan ciri URL yang terukur.</p>
         </div>
-        <div class="introduction-note" aria-label="Ringkasan pemeriksaan">
-          <div>
-            <span class="note-label">MASUKAN</span>
-            <span class="note-value">Subjek dan isi email</span>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-index"><span>EMAIL / 01</span><span>PEMERIKSAAN LOKAL</span></div>
+          <div class="mail-sheet">
+            <div class="mail-toolbar"><span class="mail-dot"></span><span>Pesan masuk</span><span class="mail-time">BARU</span></div>
+            <div class="mail-sender"><span class="sender-mark">A</span><span class="sender-lines"><i></i><i></i></span></div>
+            <div class="mail-copy-lines"><i></i><i></i><i></i></div>
+            <div class="mail-link-row"><span class="link-mark"><svg viewBox="0 0 20 20"><path d="M8.2 11.8 11.8 8.2M6.4 13.6l-1.1 1.1a3.2 3.2 0 0 1-4.5-4.5l3.3-3.3a3.2 3.2 0 0 1 4.5 0m5-1.9 1.1-1.1a3.2 3.2 0 0 1 4.5 4.5l-3.3 3.3a3.2 3.2 0 0 1-4.5 0"></path></svg></span><span class="link-line"><i></i><i></i></span></div>
           </div>
-          <div>
-            <span class="note-label">KELUARAN</span>
-            <span class="note-value">Label dan sinyal URL</span>
-          </div>
+          <div class="scan-mark"><svg viewBox="0 0 64 64"><path d="M32 5 53 13v16c0 14-8 23-21 30C19 52 11 43 11 29V13L32 5Z"></path><path d="M23 31h18M32 22v18"></path></svg></div>
+          <div class="visual-caption"><span>SUBJEK</span><span>ISI PESAN</span><span>TAUTAN</span></div>
         </div>
       </section>
 
       <div class="page-error" id="page-error" role="alert" hidden></div>
+      <noscript><p class="page-error">Aktifkan JavaScript agar formulir dapat mengirim email ke model.</p></noscript>
+    </main>
 
+    <section class="workspace-section" id="workspace" aria-labelledby="workspace-title">
+      <div class="page-shell">
+        <div class="workspace-heading">
+          <div>
+            <p class="section-kicker">RUANG PEMERIKSAAN</p>
+            <h2 id="workspace-title">Workspace</h2>
+            <p>Tempelkan email yang ingin Anda periksa.</p>
+          </div>
+          <span class="workspace-note"><span class="local-mark"></span>Data diproses secara lokal</span>
+        </div>
       <section class="workbench" aria-label="Pemeriksaan email">
         <form class="email-editor" id="email-form" novalidate>
           <div class="editor-heading">
@@ -82,6 +121,9 @@
           </div>
 
           <div class="empty-report" id="empty-report">
+            <div class="empty-illustration" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><circle cx="13.5" cy="13.5" r="7.5"></circle><path d="m19 19 7 7M10 13.5h7M13.5 10v7"></path></svg>
+            </div>
             <p class="empty-title" id="empty-report-title">Belum ada hasil.</p>
             <p id="empty-report-copy">Klasifikasi dan sinyal yang terukur akan muncul di sini setelah email dianalisis.</p>
           </div>
@@ -130,8 +172,23 @@
         </aside>
       </section>
 
-      <noscript><p class="page-error">Aktifkan JavaScript agar formulir dapat mengirim email ke model.</p></noscript>
-    </main>
+      </div>
+    </section>
+
+    <section class="how-it-works" id="cara-kerja" aria-labelledby="how-title">
+      <div class="page-shell how-layout">
+        <div class="how-intro">
+          <p class="section-kicker">ALUR SINGKAT</p>
+          <h2 id="how-title">Sebelum klik,<br>periksa dulu.</h2>
+          <p>Model memberi satu sudut pandang. Tetap tinjau isi dan tautan dengan cermat.</p>
+        </div>
+        <ol class="steps-list">
+          <li class="step-item"><span class="step-number">01</span><div><h3>Tempel email</h3><p>Masukkan subjek dan isi pesan.</p></div></li>
+          <li class="step-item"><span class="step-number">02</span><div><h3>Jalankan model</h3><p>Lihat klasifikasi serta probabilitasnya.</p></div></li>
+          <li class="step-item"><span class="step-number">03</span><div><h3>Tinjau sinyal URL</h3><p>Gunakan ciri URL sebagai informasi tambahan, bukan alasan prediksi.</p></div></li>
+        </ol>
+      </div>
+    </section>
 
     <footer class="page-footer">
       <p>Demo klasifikasi email untuk pembelajaran. Hasil model belum divalidasi sebagai perlindungan email di dunia nyata.</p>

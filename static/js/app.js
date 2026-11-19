@@ -14,6 +14,8 @@ const reportError = document.querySelector("#report-error");
 const editorError = document.querySelector("#editor-error");
 const resetButton = document.querySelector("#reset-button");
 const characterCount = document.querySelector("#character-count");
+const themeToggle = document.querySelector("#theme-toggle");
+const themeToggleLabel = document.querySelector("#theme-toggle-label");
 const sampleSubject = "Verifikasi akses Anda hari ini";
 const sampleBody = `Halo,\n\nAktivitas pada akun Anda memerlukan konfirmasi. Perbarui akses melalui tautan berikut sebelum pukul 18.00:\nhttps://akun-contoh.example/verifikasi\n\nJika Anda tidak meminta pembaruan ini, abaikan pesan ini.\n\nSalam,\nTim Contoh`;
 
@@ -21,6 +23,28 @@ const numberFormat = new Intl.NumberFormat("id-ID");
 const percentFormat = new Intl.NumberFormat("id-ID", {
   style: "percent",
   maximumFractionDigits: 1,
+});
+
+function applyTheme(theme, save = true) {
+  const isDark = theme === "dark";
+  document.documentElement.dataset.theme = isDark ? "dark" : "light";
+  themeToggle.setAttribute("aria-pressed", String(isDark));
+  themeToggle.setAttribute("aria-label", isDark ? "Aktifkan mode terang" : "Aktifkan mode gelap");
+  themeToggleLabel.textContent = isDark ? "Terang" : "Gelap";
+  document.querySelector('meta[name="theme-color"]').content = isDark ? "#101914" : "#173f32";
+
+  if (save) {
+    try {
+      localStorage.setItem("saring-theme", isDark ? "dark" : "light");
+    } catch {
+      // The selection still applies for this page view.
+    }
+  }
+}
+
+applyTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light", false);
+themeToggle.addEventListener("click", () => {
+  applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
 });
 
 function updateCharacterCount() {
